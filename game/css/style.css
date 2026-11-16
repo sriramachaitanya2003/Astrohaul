@@ -1,0 +1,495 @@
+/*
+ * Solar Drift: Void Miner - Cyberpunk Holographic Styling
+ * Authored by: agency-ui-designer & agency-ux-architect
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@500;700;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: #020204;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  color: #c9d6df;
+}
+
+#game-canvas {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  background: #020204;
+}
+
+/* Deep Space Cockpit Vignette Overlay */
+.vignette-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 42%, rgba(1, 2, 5, 0.75) 100%);
+}
+
+/* Subtle CRT Scanline Overlay */
+.scanline-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.12) 50%
+  );
+  background-size: 100% 4px;
+  opacity: 0.22;
+}
+
+/* Bottom Flight Controls Guide - Sleek Collapsible Avionics Pod */
+.controls-guide {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 5;
+  background: rgba(5, 8, 14, 0.90);
+  border: 1px solid rgba(0, 229, 255, 0.35);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 11px;
+  line-height: 1.65;
+  color: #a0c2db;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.95), 0 0 10px rgba(0, 229, 255, 0.15);
+  transition: all 0.2s ease;
+  max-width: 380px;
+}
+
+.controls-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.controls-guide.collapsed .controls-header {
+  margin-bottom: 0;
+}
+
+.controls-guide.collapsed .controls-body {
+  display: none;
+}
+
+.controls-toggle-btn {
+  font-size: 10px;
+  color: #00e5ff;
+  background: rgba(0, 229, 255, 0.12);
+  border: 1px solid rgba(0, 229, 255, 0.4);
+  border-radius: 3px;
+  padding: 1px 6px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.controls-guide h4 {
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
+  font-size: 12px;
+  font-weight: bold;
+  color: #ff8844;
+  letter-spacing: 1.4px;
+  margin-bottom: 0;
+}
+
+.key-tag {
+  color: #e0f6ff;
+  background: rgba(0, 229, 255, 0.18);
+  border: 1px solid #00e5ff;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: bold;
+  box-shadow: 0 0 6px rgba(0, 229, 255, 0.4);
+}
+
+.key-tag.amber {
+  color: #fff4d8;
+  background: rgba(255, 140, 30, 0.22);
+  border: 1px solid #ff9933;
+  box-shadow: 0 0 6px rgba(255, 150, 50, 0.45);
+}
+
+/* Station Modal Overlay */
+.station-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 20;
+  background: rgba(4, 7, 12, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  transition: opacity 0.2s ease;
+}
+
+.station-modal.hidden {
+  display: none !important;
+}
+
+.terminal-container {
+  width: 880px;
+  max-width: 95vw;
+  height: 620px;
+  max-height: 90vh;
+  background: #0b121e;
+  border: 2px solid #00e5ff;
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.25), inset 0 0 20px rgba(0, 229, 255, 0.05);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: rgba(0, 229, 255, 0.08);
+  border-bottom: 1px solid rgba(0, 229, 255, 0.3);
+}
+
+.terminal-title h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  color: #00e5ff;
+  letter-spacing: 1.5px;
+}
+
+.station-status {
+  font-size: 11px;
+  color: #00ffaa;
+  letter-spacing: 0.5px;
+}
+
+.terminal-nav {
+  display: flex;
+  background: rgba(6, 11, 18, 0.9);
+  border-bottom: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+.nav-tab {
+  flex: 1;
+  padding: 14px 10px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: #88aacc;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-tab:hover {
+  color: #00e5ff;
+  background: rgba(0, 229, 255, 0.05);
+}
+
+.nav-tab.active {
+  color: #00e5ff;
+  border-bottom-color: #00e5ff;
+  background: rgba(0, 229, 255, 0.1);
+}
+
+.terminal-body {
+  flex: 1;
+  padding: 20px 24px;
+  overflow-y: auto;
+}
+
+.tab-content {
+  display: none;
+  height: 100%;
+}
+
+.tab-content.active {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Terminal Buttons */
+.btn-terminal {
+  background: rgba(0, 229, 255, 0.12);
+  border: 1px solid #00e5ff;
+  color: #00e5ff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-terminal:hover:not(:disabled) {
+  background: #00e5ff;
+  color: #04070a;
+  box-shadow: 0 0 12px rgba(0, 229, 255, 0.6);
+}
+
+.btn-terminal:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  border-color: #445566;
+  color: #667788;
+}
+
+.btn-danger {
+  border-color: #ff3344;
+  color: #ff3344;
+  background: rgba(255, 51, 68, 0.12);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #ff3344;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(255, 51, 68, 0.6);
+}
+
+.btn-primary {
+  background: rgba(0, 255, 170, 0.15);
+  border-color: #00ffaa;
+  color: #00ffaa;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #00ffaa;
+  color: #002211;
+  box-shadow: 0 0 14px rgba(0, 255, 170, 0.6);
+}
+
+/* Refinery & Market */
+.refinery-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.refinery-header h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.refinery-header p {
+  font-size: 11px;
+  color: #88aacc;
+}
+
+.market-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.market-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(14, 23, 38, 0.7);
+  border: 1px solid rgba(0, 229, 255, 0.15);
+  border-radius: 4px;
+}
+
+.market-row.has-stock {
+  border-color: rgba(0, 229, 255, 0.45);
+  background: rgba(14, 23, 38, 0.95);
+}
+
+.item-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex: 2;
+}
+
+.ore-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.item-name {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  color: #ffffff;
+}
+
+.item-desc {
+  font-size: 10px;
+  color: #88aacc;
+  margin-top: 2px;
+}
+
+.item-market {
+  flex: 1;
+  text-align: right;
+  padding-right: 20px;
+}
+
+.item-price {
+  font-size: 12px;
+  color: #ffdd44;
+  font-weight: bold;
+}
+
+.item-qty {
+  font-size: 11px;
+  color: #88aacc;
+  margin-top: 2px;
+}
+
+.item-qty strong {
+  color: #ffffff;
+}
+
+/* Shipyard Grid */
+.shipyard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  overflow-y: auto;
+  padding-bottom: 10px;
+}
+
+.upgrade-card {
+  background: rgba(14, 23, 38, 0.75);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 4px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.card-header h4 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  color: #00e5ff;
+}
+
+.tier-badge {
+  font-size: 10px;
+  background: rgba(0, 229, 255, 0.15);
+  border: 1px solid #00e5ff;
+  color: #00e5ff;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.tier-badge.max-tier {
+  background: rgba(255, 221, 68, 0.2);
+  border-color: #ffdd44;
+  color: #ffdd44;
+}
+
+.card-desc {
+  font-size: 11px;
+  color: #88aacc;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+
+.card-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(0, 229, 255, 0.15);
+  padding-top: 10px;
+}
+
+.cost-tag {
+  font-size: 11px;
+  color: #ffdd44;
+  font-weight: bold;
+}
+
+/* Drydock Maintenance */
+.maintenance-container {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.repair-box {
+  background: rgba(14, 23, 38, 0.85);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-radius: 4px;
+  padding: 18px;
+}
+
+.box-stat {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  font-size: 13px;
+}
+
+.box-stat strong {
+  color: #ffffff;
+}
+
+/* Terminal Footer */
+.terminal-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: rgba(6, 11, 18, 0.95);
+  border-top: 1px solid rgba(0, 229, 255, 0.3);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+}
+
+.credits-val {
+  color: #ffdd44;
+  font-weight: bold;
+  text-shadow: 0 0 8px rgba(255, 221, 68, 0.4);
+}
+
+.cargo-val {
+  color: #00e5ff;
+  font-weight: bold;
+}
+

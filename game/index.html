@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solar Drift: Void Miner</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!-- Preloaded Cosmic Nebula Asset -->
+  <img id="nebula-bg-asset" src="nebula.jpg" alt="Cosmic Nebula Background" style="display:none;">
+
+  <!-- Canvas Viewport -->
+  <canvas id="game-canvas"></canvas>
+
+  <!-- Deep Space Cockpit Vignette Overlay -->
+  <div class="vignette-overlay"></div>
+
+  <!-- CRT Scanline Filter -->
+  <div class="scanline-overlay"></div>
+
+  <!-- Flight Controls HUD Guide (Collapsible) -->
+  <div id="controls-guide" class="controls-guide">
+    <div class="controls-header" id="controls-toggle">
+      <h4>// FLIGHT SYSTEMS</h4>
+      <span id="controls-toggle-btn" class="controls-toggle-btn">[H: HIDE]</span>
+    </div>
+    <div class="controls-body">
+      <div><span class="key-tag">W</span> / <span class="key-tag">S</span> : Main Thrusters / Retro Brake</div>
+      <div><span class="key-tag">A</span> / <span class="key-tag">D</span> : RCS Steering</div>
+      <div><span class="key-tag amber">SHIFT</span> : Afterburner Overdrive</div>
+      <div><span class="key-tag">L-CLICK</span> / <span class="key-tag">J</span> : Thermal Mining Laser</div>
+      <div><span class="key-tag amber">R-CLICK</span> / <span class="key-tag amber">SPACE</span> : Tractor Beam</div>
+      <div><span class="key-tag">Q</span> / <span class="key-tag">TAB</span> : Sonar Deep-Scan (Reveals 3x Crits)</div>
+      <div><span class="key-tag">C</span> : EMP Shockwave (Stuns Pirates & Shatters Rocks)</div>
+      <div><span class="key-tag">R</span> : Heavy Homing Torpedo (Locks on target)</div>
+      <div><span class="key-tag">F</span> : Dual Plasma Cannons</div>
+      <div><span class="key-tag">X</span> : Toggle Flight Assist (Inertia Dampeners)</div>
+      <div><span class="key-tag" style="border-color: #00ffaa; color: #00ffaa;">G</span> : Autopilot Return to Starbase</div>
+      <div><span class="key-tag">E</span> : Dock at Starbase (when in proximity)</div>
+      <div><span class="key-tag">H</span> : Toggle Controls Guide</div>
+    </div>
+  </div>
+
+  <!-- Audio Initializer & Briefing Splash -->
+  <div id="briefing-splash" class="station-modal">
+    <div class="terminal-container" style="height: auto; max-width: 620px;">
+      <div class="terminal-header">
+        <div class="terminal-title">
+          <h2>SOLAR DRIFT: VOID MINER</h2>
+          <span class="station-status">SYS.VER 1.0.4 // SECTOR ALPHA INITIALIZATION</span>
+        </div>
+      </div>
+      <div class="terminal-body" style="padding: 24px;">
+        <p style="font-size: 13px; line-height: 1.6; margin-bottom: 16px;">
+          Welcome, Prospector. You are stationed at <strong>Aegis Starbase</strong> on the inner rim of an uncharted
+          asteroid field.
+        </p>
+        <p style="font-size: 12px; color: #88aacc; line-height: 1.5; margin-bottom: 14px;">
+          • <strong>Mine:</strong> Target mineral-rich asteroids with your continuous cutting laser until they
+          fracture.<br>
+          • <strong>Harvest:</strong> Engage your gravity tractor beam to reel drifting ore crystals into your cargo
+          hold.<br>
+          • <strong>Survive:</strong> Beware rogue pirate raiders patrolling the outer asteroid belt.<br>
+          • <strong>Upgrade:</strong> Return to Aegis Starbase to refine minerals, sell commodities, and outfit your
+          ship with military-grade thrusters, shields, and cannons.
+        </p>
+        <div style="text-align: center; margin-top: 20px;">
+          <button id="btn-launch-game" class="btn-terminal btn-primary" style="font-size: 14px; padding: 12px 28px;">
+            INITIALIZE FLIGHT SYSTEMS & LAUNCH
+          </button>
+        </div>
+      </div>
+      <div class="terminal-footer" style="justify-content: center; font-size: 10px; color: #557799;">
+        [AUDIO ENGINE & SENSORS ACTIVATE UPON LAUNCH]
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+  <script>
+    const launchBtn = document.getElementById('btn-launch-game');
+    const splash = document.getElementById('briefing-splash');
+
+    function launchGame() {
+      if (splash && !splash.classList.contains('hidden')) {
+        splash.classList.add('hidden');
+        if (window.__solarDriftGame && window.__solarDriftGame.soundEngine) {
+          window.__solarDriftGame.soundEngine.init();
+          window.__solarDriftGame.soundEngine.resume();
+        }
+      }
+    }
+
+    if (launchBtn) {
+      launchBtn.addEventListener('click', launchGame);
+    }
+
+    // Toggle Flight Controls Guide (Click or Key 'H')
+    const controlsGuide = document.getElementById('controls-guide');
+    const controlsToggle = document.getElementById('controls-toggle');
+    const controlsToggleBtn = document.getElementById('controls-toggle-btn');
+
+    function toggleControls() {
+      if (!controlsGuide) return;
+      controlsGuide.classList.toggle('collapsed');
+      const isCollapsed = controlsGuide.classList.contains('collapsed');
+      if (controlsToggleBtn) {
+        controlsToggleBtn.textContent = isCollapsed ? '[H: EXPAND]' : '[H: HIDE]';
+      }
+    }
+
+    if (controlsToggle) {
+      controlsToggle.addEventListener('click', toggleControls);
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (splash && !splash.classList.contains('hidden')) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          launchGame();
+          return;
+        }
+      }
+
+      if (e.key === 'h' || e.key === 'H') {
+        if (splash && !splash.classList.contains('hidden')) return;
+        toggleControls();
+      }
+    });
+  </script>
+</body>
+
+</html>
